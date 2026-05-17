@@ -1,0 +1,26 @@
+{
+  "claude-plugins-official": {
+    "source": {
+      "source": "github",
+      "repo": "anthropics/claude-plugins-official"
+    },
+    "installLocation": "/Users/ponteski/.claude/plugins/marketplaces/claude-plugins-official",
+    "lastUpdated": "2026-05-17T21:29:09.619Z"
+  },
+  "ui-ux-pro-max-skill": {
+    "source": {
+      "source": "github",
+      "repo": "nextlevelbuilder/ui-ux-pro-max-skill"
+    },
+    "installLocation": "/Users/ponteski/.claude/plugins/marketplaces/ui-ux-pro-max-skill",
+    "lastUpdated": "2026-05-08T07:18:23.486Z"
+  },
+  "anthropic-agent-skills": {
+    "source": {
+      "source": "github",
+      "repo": "anthropics/skills"
+    },
+    "installLocation": "/Users/ponteski/.claude/plugins/marketplaces/anthropic-agent-skills",
+    "lastUpdated": "2026-05-17T21:29:09.492Z"
+  }
+}
