@@ -92,6 +92,7 @@ source /Users/ponteski/.config/git.plugin.zsh
 source /Users/ponteski/.config/zsh-extract-master/extract.plugin.zsh
 
 
+export _ZO_DOCTOR=0
 eval "$(zoxide init --cmd cd zsh)"
 
 eval "$(gh copilot alias -- zsh)"

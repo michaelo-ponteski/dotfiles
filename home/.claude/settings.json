@@ -1,4 +1,20 @@
 {
+  "attribution": {
+    "commit": "",
+    "pr": ""
+  },
+  "permissions": {
+    "allow": [
+      "Bash(npx tsc --noEmit *)",
+      "Bash(npm run lint *)"
+    ]
+  },
+  "skillOverrides": {
+    "docx": "off",
+    "pptx": "off",
+    "document-skills:docx": "off",
+    "document-skills:pptx": "off"
+  },
   "hooks": {
     "SessionStart": [
       {
@@ -41,9 +57,6 @@
     "padding": 0,
     "refreshInterval": 30
   },
-  "fileCheckpointingEnabled": true,
-  "showThinkingSummaries": true,
-  "preferredNotifChannel": "notifications_disabled",
   "enabledPlugins": {
     "ui-ux-pro-max@ui-ux-pro-max-skill": true,
     "document-skills@anthropic-agent-skills": true,
@@ -71,23 +84,10 @@
     }
   },
   "effortLevel": "xhigh",
-  "autoUpdatesChannel": "stable",
+  "showThinkingSummaries": true,
   "theme": "dark",
   "editorMode": "normal",
-  "skillOverrides": {
-    "docx": "off",
-    "pptx": "off",
-    "document-skills:docx": "off",
-    "document-skills:pptx": "off"
-  },
-  "permissions": {
-    "allow": [
-      "Bash(npx tsc --noEmit *)",
-      "Bash(npm run lint *)"
-    ]
-  },
-  "attribution": {
-    "commit": "",
-    "pr": ""
-  }
+  "preferredNotifChannel": "notifications_disabled",
+  "fileCheckpointingEnabled": true,
+  "skipWorkflowUsageWarning": true
 }
