@@ -49,6 +49,62 @@ My `.zshrc` aliases **do** apply to your Bash tool subshell. Notable ones:
 
 **Rule of thumb:** if a command's output needs to be parsed or its behavior needs to be exact, prefix with `command` or `\`. If it's just for me to read, the aliased version is fine.
 
+# Sprawozdanie (daily summary)
+
+When I write **`sprawozdanie`** (alone, or with optional context like "zrób sprawozdanie", "daj sprawozdanie z dzisiaj"), produce a terse, plain-text daily report in **this exact format**:
+
+```
+Sprawozdanie:
+- <deliverable in 3–10 słów, czasem akronim/skrót dozwolony>
+- <kolejny deliverable>
+- <…>
+
+Plan na jutro:
+- <konkretny next step>
+- <…>
+```
+
+Rules:
+- **3–6 punktów w każdej sekcji**, rzadko więcej. Zwięzłość > kompletność.
+- **Konkretne dostarczone rzeczy**, nie proces. ("dopięcie X" / "postawienie Y" / "wpięcie Z na live", nie "pracowałem nad X").
+- **Polski casual + technical EN terms** — "admin panel", "tracking", "API", "deploy" zostają po angielsku.
+- "+" jako separator gdy dwie ściśle powiązane rzeczy w jednej linii ("rozplanowanie + postawienie środowiska").
+- **Bez emoji, bez markdown formatowania w listach** (sam bullet "-" wystarczy).
+- **"Plan na jutro"** — derive z otwartych task'ów, blokerów, deklaracji "to do jutro" z dzisiejszej sesji. Jeśli kontekst nie zawiera nic konkretnego na jutro → krótko zaproponuj 2–3 logiczne next-step'y i oznacz "(proponowane — potwierdź)".
+
+## Persistent file: `~/Personal/Inigra/sprawozdanie.txt`
+
+Cross-session, cross-project single source of truth. Procedure on every `sprawozdanie` invocation:
+
+1. **Check mtime** of `~/Personal/Inigra/sprawozdanie.txt`:
+   ```bash
+   stat -f %Sm -t %Y-%m-%d ~/Personal/Inigra/sprawozdanie.txt 2>/dev/null
+   ```
+   Compare with today's date (`date +%Y-%m-%d`).
+
+2. **If today** → APPEND mode: read existing file, take new bullets from current session, **merge** into existing sections (dedupe — drop bullets whose first ~6 słów już są w pliku; preserve original order, dopisz nowe na końcu sekcji). Update "Plan na jutro" too — przerób na bieżący stan, nie tylko dodawaj.
+
+3. **If yesterday/older / file missing** → OVERWRITE mode: write fresh report from scratch covering tylko bieżącą sesję.
+
+4. **Always write** the final result to the file (`Write` tool, full content replacement) AND echo it back to the chat for user confirmation.
+
+5. **Header** w pliku zawsze: `# Sprawozdanie YYYY-MM-DD` (z aktualną datą), pusta linia, potem sekcje.
+
+If `~/Personal/Inigra/` doesn't exist on the host → say so and fall back to chat-only (don't create the dir).
+
+Example reference (real format z 2026-05):
+```
+# Sprawozdanie 2026-05-26
+
+Sprawozdanie:
+- dopięcie kilinskiego38.pl — admin panel: galeria, rzuty, mieszkania, tracking panel
+- połączenia na sales.sovo.dev do doradców
+- rozplanowanie + postawienie środowiska dla nowego projektu
+
+Plan na jutro:
+- ...
+```
+
 # Anti-patterns
 
 - "Great question!" / "Excellent!" openers
