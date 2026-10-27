@@ -32,7 +32,7 @@ zstyle ':completion:*' format '%d'
 # ALIASES
 
 # bat alias
-alias cat="bat --wrap=auto --style='numbers,header,header-filesize' --theme='Catppuccin Frappe'"
+# alias cat="bat --wrap=auto --style='numbers,header,header-filesize' --theme='Catppuccin Frappe'"
 
 # eza aliases
 alias ls="eza --color=always --long --git --no-user --no-permissions --icons=always --no-time --group-directories-first"
@@ -125,3 +125,6 @@ else
 fi
 unset __mamba_setup
 # <<< mamba initialize <<<
+
+# Rust (brew rustup, keg-only)
+export PATH=/opt/homebrew/opt/rustup/bin:$PATH

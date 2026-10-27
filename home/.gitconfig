@@ -8,3 +8,5 @@
 
 [includeIf "gitdir/i:~/Personal/Inigra/"]
 	path = ~/.gitconfig-work
+[init]
+	defaultBranch = main

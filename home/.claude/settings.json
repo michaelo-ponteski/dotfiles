@@ -9,6 +9,7 @@
       "Bash(npm run lint *)"
     ]
   },
+  "model": "opus",
   "skillOverrides": {
     "docx": "off",
     "pptx": "off",
@@ -27,18 +28,6 @@
         ]
       }
     ],
-    "PreToolUse": [
-      {
-        "matcher": "Bash",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/Users/ponteski/.claude/hooks/remote-safety-gate.sh",
-            "timeout": 5
-          }
-        ]
-      }
-    ],
     "Notification": [
       {
         "hooks": [
@@ -46,6 +35,20 @@
             "type": "command",
             "command": "/Users/ponteski/.claude/hooks/notify.sh",
             "timeout": 5
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/ponteski/.claude/hooks/graphify-fresh.py",
+            "timeout": 180,
+            "onFailure": "block",
+            "statusMessage": "Checking graphify graph freshness..."
           }
         ]
       }
@@ -67,7 +70,11 @@
     "claude-md-management@claude-plugins-official": true,
     "typescript-lsp@claude-plugins-official": true,
     "claude-code-setup@claude-plugins-official": true,
-    "supabase@claude-plugins-official": false
+    "supabase@claude-plugins-official": false,
+    "mcpmarket-me@mcpmarket-me": true,
+    "rust-analyzer-lsp@claude-plugins-official": true,
+    "caveman@caveman": true,
+    "ponytail@ponytail": true
   },
   "extraKnownMarketplaces": {
     "ui-ux-pro-max-skill": {
@@ -81,13 +88,43 @@
         "source": "github",
         "repo": "anthropics/skills"
       }
+    },
+    "mcpmarket-me": {
+      "source": {
+        "source": "directory",
+        "path": "/Users/ponteski/.claude/plugins/mcpmarket-me"
+      }
+    },
+    "caveman": {
+      "source": {
+        "source": "github",
+        "repo": "JuliusBrussee/caveman"
+      }
+    },
+    "ponytail": {
+      "source": {
+        "source": "github",
+        "repo": "DietrichGebert/ponytail"
+      }
     }
   },
   "effortLevel": "xhigh",
+  "modelSettings": {
+    "claude-fable-5-1": {
+      "effortLevel": "high"
+    },
+    "claude-opus-5": {
+      "effortLevel": "xhigh"
+    },
+    "claude-opus-5-5": {
+      "effortLevel": "high"
+    }
+  },
+  "tui": "fullscreen",
   "showThinkingSummaries": true,
+  "skipWorkflowUsageWarning": true,
   "theme": "dark",
   "editorMode": "normal",
   "preferredNotifChannel": "notifications_disabled",
-  "fileCheckpointingEnabled": true,
-  "skipWorkflowUsageWarning": true
+  "fileCheckpointingEnabled": true
 }

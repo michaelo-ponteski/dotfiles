@@ -23,6 +23,14 @@ done
 
 [ -d "$SRC" ] || { echo "Source directory not found: $SRC"; exit 1; }
 
+# Public repo: .gitattributes runs settings.json through this filter, which keeps
+# machine-local autoMode (client hosts, prod paths) out of commits. Clone-local config, so set it here.
+if [ "$DRY_RUN" = "0" ]; then
+  git -C "$DOTFILES_DIR" config filter.strip-private.clean "jq 'del(.autoMode)'"
+  git -C "$DOTFILES_DIR" config filter.strip-private.smudge cat
+  git -C "$DOTFILES_DIR" config filter.strip-private.required true
+fi
+
 linked=0
 skipped=0
 backed_up=0

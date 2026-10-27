@@ -18,10 +18,7 @@ home/
 │   ├── settings.local.json local UI prefs
 │   ├── statusline.sh       custom 2-line statusline (model, ctx %, rate limits)
 │   ├── agents/             custom subagents
-│   ├── hooks/              SessionStart skill pruner, PreToolUse remote-safety gate
-│   └── plugins/
-│       ├── installed_plugins.json   manifest for re-installing
-│       └── known_marketplaces.json  marketplace sources
+│   └── hooks/              SessionStart skill pruner, PreToolUse remote-safety gate
 └── .config/
     ├── starship.toml       prompt
     ├── git.plugin.zsh      custom zsh git plugin
@@ -59,7 +56,7 @@ These are referenced in configs but not tracked here (install via Homebrew or si
 | `eza` `bat` `zoxide` `lazygit` `micro` `neovim` `tmux` `wezterm` `htop` | aliased / sourced commands |
 | `miniforge3` (mamba/conda) | `.zshrc` references it; `mamba shell init` regenerates the init block |
 | `gh` `gh-copilot` | GitHub CLI + Copilot CLI |
-| `claude` (Claude Code) | `.claude/` is its config; install separately, then run `claude plugin install` to restore plugins listed in `installed_plugins.json` |
+| `claude` (Claude Code) | `.claude/` is its config; install separately, then `claude plugin marketplace add` + `claude plugin install` for each entry in `settings.json` → `extraKnownMarketplaces` / `enabledPlugins` |
 
 Suggested one-liner for Homebrew:
 
@@ -73,6 +70,8 @@ brew install zsh-autosuggestions zsh-syntax-highlighting zsh-completions \
 
 - `~/.claude.json`, `~/.claude/sessions/`, `~/.claude/projects/`, `~/.claude/history.jsonl` — local state, auth tokens, conversation logs
 - `~/.claude/plugins/cache/` and `marketplaces/` — re-downloaded by `claude plugin install`
+- `~/.claude/plugins/installed_plugins.json`, `known_marketplaces.json` — Claude Code rewrites them as regular files (breaking the symlink), so a tracked copy goes stale and `install.sh` would overwrite the live registry with it
+- `autoMode` in `settings.json` — machine-local (client hosts, prod paths); stripped from commits by the `strip-private` git filter (`.gitattributes`, configured by `install.sh`)
 - `~/.config/gh/`, `~/.config/github-copilot/`, `~/.config/gh-copilot/` — auth tokens
 - `~/.config/miniforge3/`, `~/.config/fzf-tab/`, `~/.config/zsh-*/` — installed via Homebrew; would bloat the repo
 - `~/.ssh/`, `~/.gnupg/` — secrets
@@ -85,7 +84,7 @@ When you change a config file in `$HOME`, the symlink writes back through to `~/
 ```bash
 cd ~/dotfiles
 git status
-git add -A
+git add -p        # review hunks: this repo is public
 git commit -m "..."
 ```
 

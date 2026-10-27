@@ -30,3 +30,5 @@ home/.config/github-copilot/
 home/.config/gh-copilot/
 home/.config/configstore/
 home/.config/tmux/plugins/
+home/.claude/plugins/installed_plugins.json
+home/.claude/plugins/known_marketplaces.json

@@ -37,12 +37,17 @@ Software developer + AI/ML student (program in English). Strong engineering fund
 
 I build these — talk to me about edge cases, failure modes, rate limits, idempotency, retry logic, observability. Don't gloss over the unhappy paths.
 
+# Nawigacja po kodzie (graphify)
+
+- Jest `graphify-out/graph.json` → najpierw `graphify query/explain/path/affected` do orientacji (gdzie co jest, przepływ danych, blast radius). Hook PreToolUse sam odświeża graf przed odczytem, jeśli repo się zmieniło; gdy odświeżenie padnie, zapytanie jest blokowane — wtedy grep/LSP.
+- Przed edycją współdzielonego kodu i tak grep (albo LSP findReferences) po wszystkich callerach. Graf nigdy nie jest traktowany jako kompletny (INFERRED edges, `--budget` ucina wynik, `.sql` bez tree-sitter nie jest indeksowany).
+- Zmiany w docs/obrazach graf łapie tylko przez `/graphify --update` (LLM); hook odświeża wyłącznie warstwę kodu.
+
 # Shell aliases (zsh)
 
 My `.zshrc` aliases **do** apply to your Bash tool subshell. Notable ones:
 
 - `rm` → `rm -rI` — recursive deletes prompt once before proceeding (interactive). Means non-interactive `rm -r somedir` will *hang* waiting for input via the alias. For scripted/recursive deletes use `command rm -rf <path>` explicitly. Still confirm with me before deleting anything I didn't just create.
-- `cat` → `bat` (colors, headers, line numbers) — pollutes parseable output. For pipelines or grep, use `command cat` or `\cat`. For reading file contents, prefer the Read tool anyway.
 - `ls` → `eza` (icons, git status, colors) — output has unicode glyphs and ANSI codes. For parseable listings use `command ls` or `find`.
 - `cd` → `zoxide` (fuzzy jumps) — `cd foo` may land somewhere unexpected. Always use absolute paths.
 - `md` → `mkdir -p`, `lg` → `lazygit`, `lt`/`ll` → eza variants — harmless, just be aware.
@@ -63,6 +68,8 @@ Plan na jutro:
 - <konkretny next step>
 - <…>
 ```
+
+**Styl: pełne, naturalne zdania — caveman/ultracave NIE obowiązuje** ani w pliku, ani w czacie. Zwięzłość tak, telegraficzny skrót nie.
 
 Rules:
 - **3–6 punktów w każdej sekcji**, rzadko więcej. Zwięzłość > kompletność.
