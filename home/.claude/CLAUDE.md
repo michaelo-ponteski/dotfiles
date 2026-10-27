@@ -71,6 +71,8 @@ Plan na jutro:
 
 **Styl: pełne, naturalne zdania — caveman/ultracave NIE obowiązuje** ani w pliku, ani w czacie. Zwięzłość tak, telegraficzny skrót nie.
 
+@~/.claude/CLAUDE.private.md
+
 Rules:
 - **3–6 punktów w każdej sekcji**, rzadko więcej. Zwięzłość > kompletność.
 - **Konkretne dostarczone rzeczy**, nie proces. ("dopięcie X" / "postawienie Y" / "wpięcie Z na live", nie "pracowałem nad X").
